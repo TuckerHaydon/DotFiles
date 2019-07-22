@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # Determine location of this file
-ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )../"
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/../"
 
 # Helper variables
 TMUX_DIR="${ROOT_DIR}/tmux/"
 VIM_DIR="${ROOT_DIR}/vim/"
 
 # Install submodules
+cd ${ROOT_DIR}
 git submodule update --init --recursive
 
 
