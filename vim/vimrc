@@ -1,0 +1,98 @@
+" Tucker Haydon
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" COLORSCHEME
+colo desert
+
+" Search down into subfolders
+" Provides tab-completion for all file-related tasks
+set path+=**          " search with :find 
+
+" Mouse
+set mouse=a
+
+
+" ENABLE SYNTAX PROCESSING 
+syntax enable
+set backspace=indent,eol,start
+
+
+" SPACING AND TABS 
+filetype plugin indent on   " load filetype-specific indent files
+set tabstop=2
+set softtabstop=2           " number of spaces in tab when editing
+set shiftwidth=2
+set expandtab               " tabs are spaces
+set smartindent             " indent automatically on new lines
+
+
+" UI CONFIG
+set number              " show line numbers
+set showcmd             " show command in bottom bar
+set cursorline          " highlight current line
+set wildmenu            " visual autocomplete for command menu
+set lazyredraw          " redraw only when we need to.
+set showmatch           " highlight matching [{()}]
+
+
+" SEARCHING
+set incsearch           " search as characters are entered
+set hlsearch            " highlight matches
+
+" LINE WIDTH
+set tw=80
+
+" Create the 'tags' file
+command! MakeTags !ctags -R .
+
+" Create cout template
+nnoremap ,cout :read $HOME/.vim/templates/cout.cc<CR>==wwwllli
+
+" Statusline config
+" set statusline=
+" set statusline+=%#LineNr#
+" set statusline+=\ %f
+" set statusline+=%m\
+
+" Buffer movement
+" Tab cycles to next buffer
+nnoremap <Tab> :bnext<CR>
+" Shift-tab cycles to previous buffer
+nnoremap <S-Tab> :bprevious<CR>
+
+
+" Commenting blocks of code.
+autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
+autocmd FileType sh,ruby,python   let b:comment_leader = '# '
+autocmd FileType conf,fstab       let b:comment_leader = '# '
+autocmd FileType tex              let b:comment_leader = '% '
+autocmd FileType mail             let b:comment_leader = '> '
+autocmd FileType vim              let b:comment_leader = '" '
+" ,cc in normal or visual mode to add comments
+noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+" ,cu in normal or visual mode to delete comments
+noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+
+" Plugins
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/bundle')
+
+" Buffers in command bar
+Plug 'bling/vim-bufferline'
+
+call plug#end()
+
+set laststatus=2
+let g:bufferline_active_highlight = 'StatusLine'
+" let g:bufferline_inactive_highlight = 'StatusLineNC'
+
+let g:bufferline_echo = 0
+autocmd VimEnter *
+  \ let &statusline='%{bufferline#refresh_status()}'
+    \ .bufferline#get_status_string()
