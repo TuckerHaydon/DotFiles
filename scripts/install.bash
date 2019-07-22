@@ -6,6 +6,7 @@ ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/../"
 # Helper variables
 TMUX_DIR="${ROOT_DIR}/tmux/"
 VIM_DIR="${ROOT_DIR}/vim/"
+ZSH_DIR="${ROOT_DIR}/zsh/"
 
 # Install submodules
 cd ${ROOT_DIR}
@@ -41,3 +42,11 @@ fi
 cp -r ${VIM_DIR}/vim ${HOME}/.vim
 
 vim +PlugInstall +qall
+
+###############
+### Zsh
+###############
+if [ -d "${HOME}/.zshrc" ]; then
+    rm -rf ${HOME}/.zshrc
+fi
+cp ${ZSH_DIR}/zshrc ${HOME}/.zshrc
