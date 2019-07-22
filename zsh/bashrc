@@ -1,8 +1,0 @@
-# Alias for pretty git history graph
-alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
-
-# Long list
-alias ll="ls -la"
-
-export PS1='`pwd`: '
-export PS2='> '
