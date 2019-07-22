@@ -74,10 +74,14 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export SHELL="$(which zsh)"
-export EDITOR='vim'
+export EDITOR="vim"
+export TERM="xterm-256color"
 
 # Alias for pretty git history graph
 alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'"
 
 # Long list
 alias ll="ls -la"
+
+# Launch tmux assuming utf-8 support
+alias tmux="tmux -u"
